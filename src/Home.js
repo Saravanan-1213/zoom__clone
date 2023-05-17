@@ -48,7 +48,7 @@ const Home = () => {
         className="zoom-image"
         src="https://1000logos.net/wp-content/uploads/2021/06/Zoom-Logo-2014.png"
       />
-      <h1 className="hero text-center my-8 text-3xl">Video chat App</h1>
+      <h1 className="hero">Video chat App</h1>
       {/* host meeting */}
       <div className="flex flex-col container mx-auto  md:flex-row">
         <div className="mx-auto p-4 w-full  md:w-1/3">

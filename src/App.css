@@ -100,4 +100,9 @@ a:hover {
 
 .hero{
   margin-top: -60px;
+  color: rgb(0, 153, 255);
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bolder;
 }
+
