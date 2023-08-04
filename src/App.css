@@ -106,3 +106,68 @@ a:hover {
   font-weight: bolder;
 }
 
+.login-form{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  max-width: 350px;
+  margin:0 auto;
+  margin-top: 100px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px black;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.login-title{
+  font-size: larger;
+  color: rgb(0, 153, 255);
+  font-weight: bold;
+  margin-top: 30px;
+}
+.login-btn{
+  cursor: pointer;
+  height: 40px;
+}
+
+
+.signup-title{
+  font-size:larger;
+  color: rgb(0, 153, 255);
+  font-weight: bold;
+   }
+
+
+
+.signup-form{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  max-width: 350px;
+  margin:0 auto;
+  margin-top: 100px; 
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px black;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 100%;
+  
+}
+h1{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 50px;
+  
+}
+.logout-btn{
+  display: flex;
+  justify-content:space-around;
+  margin: auto 0 ;
+ align-content:end;
+ margin-left: 90%;
+ margin-top: -50px;
+}

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import "./App.css";
+import { Button } from "@mui/material";
 
 const Home = () => {
   const socket = io("https://zoom-clone-backend.onrender.com/");
@@ -48,7 +49,14 @@ const Home = () => {
         className="zoom-image"
         src="https://1000logos.net/wp-content/uploads/2021/06/Zoom-Logo-2014.png"
       />
-      <h1 className="hero">Video chat App</h1>
+      <h1 className="hero">Video Chat App</h1>
+      <div className="logout-btn">
+        {/* <Button variant="contained" onClick={() => navigate("/")}>
+          logout
+        </Button> */}
+        <Logout />
+      </div>
+
       {/* host meeting */}
       <div className="flex flex-col container mx-auto  md:flex-row">
         <div className="mx-auto p-4 w-full  md:w-1/3">
@@ -152,4 +160,14 @@ const Home = () => {
   );
 };
 
+export function Logout() {
+  const navigate = useNavigate();
+  localStorage.removeItem("token");
+  navigate("/");
+  return (
+    <Button variant="contained" onClick={() => navigate("/")}>
+      logout
+    </Button>
+  );
+}
 export default Home;

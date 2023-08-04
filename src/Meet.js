@@ -180,7 +180,7 @@ const Meet = () => {
     media.getTracks().forEach(function (track) {
       track.stop();
     });
-    window.location.replace("/");
+    window.location.replace("/user");
   };
 
   // function for invite the people
