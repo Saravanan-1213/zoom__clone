@@ -10,7 +10,7 @@ function Signup() {
     onSubmit: async (values) => {
       console.log(values);
 
-      const data = await fetch("https://backend-zoom.onrender.com/signup", {
+      const data = await fetch("http://localhost:4000/user/signup", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
