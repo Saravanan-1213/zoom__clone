@@ -6,7 +6,7 @@ import "./App.css";
 import { Button } from "@mui/material";
 
 const Home = () => {
-  const socket = io("https://zoom-clone-backend.onrender.com/");
+  const socket = io("https://backend-zoom.onrender.com");
 
   const [code, setCode] = useState();
   const [copys, setCopys] = useState(false);

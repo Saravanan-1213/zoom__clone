@@ -9,7 +9,7 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 
 const Meet = () => {
-  const socket = io("https://zoom-clone-backend.onrender.com");
+  const socket = io("https://backend-zoom.onrender.com");
   const { name } = useParams();
   const { room } = useParams();
 
