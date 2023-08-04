@@ -1,9 +1,3 @@
-*{
-     /* background: linear-gradient(
-            to right,
-            #519fd3,  #519fd3) */
-            /* background-color: rgb(161, 217, 255); */
-}
 
 
 .hero__subtitle{
@@ -170,4 +164,7 @@ h1{
  align-content:end;
  margin-left: 90%;
  margin-top: -50px;
+}
+.login-h1{
+  font-size:x-large;
 }

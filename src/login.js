@@ -34,8 +34,8 @@ function Login() {
     },
   });
   return (
-    <div className="container">
-      <h1>WELCOME TO ZOOM Clone APP</h1>
+    <div className="container-login">
+      <h1 className="login-h1">WELCOME TO ZOOM Clone APP</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <h1 className="login-title"> LOGIN </h1>
         <TextField
