@@ -6,7 +6,7 @@ import "./App.css";
 import { Button } from "@mui/material";
 
 const Home = () => {
-  const socket = io("https://backend-zoom.onrender.com");
+  const socket = io("https://zoom-backend-awl3.onrender.com");
 
   const [code, setCode] = useState();
   const [copys, setCopys] = useState(false);
@@ -50,12 +50,9 @@ const Home = () => {
         src="https://1000logos.net/wp-content/uploads/2021/06/Zoom-Logo-2014.png"
       />
       <h1 className="hero">Video Chat App</h1>
-      <div className="logout-btn">
-        {/* <Button variant="contained" onClick={() => navigate("/")}>
-          logout
-        </Button> */}
-        <Logout />
-      </div>
+      {/* </div><div className="logout-btn"> */}
+      {/* <Logout /> */}
+      {/* </div> */}
 
       {/* host meeting */}
       <div className="flex flex-col container mx-auto  md:flex-row">

@@ -10,13 +10,16 @@ function Signup() {
     onSubmit: async (values) => {
       console.log(values);
 
-      const data = await fetch("http://localhost:4000/user/signup", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const data = await fetch(
+        "https://zoom-backend-awl3.onrender.com/user/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       const result = await data.json();
       console.log("✅SUCCESS", result);

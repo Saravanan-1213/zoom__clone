@@ -12,13 +12,16 @@ function Login() {
     onSubmit: async (values) => {
       console.log(values);
 
-      const data = await fetch("http://localhost:4000/user/login", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const data = await fetch(
+        "https://zoom-backend-awl3.onrender.com/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
       if (data.status == 401) {
         console.log("❌ERROR");
         setFormState("error");
