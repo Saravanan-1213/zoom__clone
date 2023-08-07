@@ -159,11 +159,11 @@ h1{
 }
 .logout-btn{
   display: flex;
-  justify-content:space-around;
-  margin: auto 0 ;
- align-content:end;
- margin-left: 90%;
- margin-top: -50px;
+  justify-content:flex-end;
+  margin: right 5px;
+  height: 50px;
+  margin-top: 15px;
+
 }
 .login-h1{
   font-size:x-large;

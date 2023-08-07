@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import "./App.css";
 import { Button } from "@mui/material";
-import Logout from "./logout";
+
 const Home = () => {
   const socket = io("https://zoom-backend-awl3.onrender.com");
 
@@ -50,9 +50,6 @@ const Home = () => {
         src="https://1000logos.net/wp-content/uploads/2021/06/Zoom-Logo-2014.png"
       />
       <h1 className="hero">Video Chat App</h1>
-      <div className="logout-btn">
-        <Logout />
-      </div>
 
       {/* host meeting */}
       <div className="flex flex-col container mx-auto  md:flex-row">
@@ -117,8 +114,12 @@ const Home = () => {
             className="hero__image"
             src="https://global-uploads.webflow.com/5f8b3f92189560cd389cf2b3/6050eb64c6cade12359cab66_featured-look-good-zoom.png"
           />
+          <div className="logout-btn">
+            <Button variant="contained" onClick={() => navigate("/")}>
+              LOGOUT
+            </Button>
+          </div>
         </div>
-
         {/* join meeting */}
         <div className="mx-auto p-4 w-full  md:w-1/3">
           <h2 className="text-2xl text-center my-6 text-green-600 ">
