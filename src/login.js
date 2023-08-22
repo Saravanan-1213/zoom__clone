@@ -1,69 +1,127 @@
-import { Button, TextField } from "@mui/material";
-import { useFormik } from "formik";
-import React, { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { Routes, Route, Link } from "react-router-dom";
+import "./App.css";
 
-function Login() {
+export const Auth = () => {
+  return (
+    <div>
+      <div className="auth">
+        <h1 className="heading">Zoom Application</h1>
+        <img
+          className="img-logo"
+          src="https://cdn.dribbble.com/users/1467568/screenshots/3439069/videochat4.gif"
+          alt=""
+        />
+        <Login />
+        <Register />
+      </div>
+    </div>
+  );
+};
+
+//Login
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [_, setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
-  const [formState, setFormState] = useState("success");
-  const { handleChange, values, handleSubmit } = useFormik({
-    initialValues: { username: "", password: "" },
-    onSubmit: async (values) => {
-      console.log(values);
+  const onSubmit = async (event) => {
+    event.preventDefault();
 
-      const data = await fetch(
-        "https://zoom-backend-awl3.onrender.com/user/login",
+    try {
+      const response = await axios.post(
+        "https://zoom-backend-awl3.onrender.com/auth/login",
         {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(values),
+          username,
+          password,
         }
       );
-      if (data.status == 401) {
-        console.log("❌ERROR");
-        setFormState("error");
-      } else {
-        const result = await data.json();
-        console.log("✅SUCCESS", result);
-        localStorage.setItem("token", result.token);
-        navigate("/user");
-      }
-    },
-  });
+
+      setCookies("access_token", response.data.token);
+      window.localStorage.setItem("userID", response.data.userID);
+      navigate("/user");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <div className="container-login">
-      <h1 className="login-h1">WELCOME TO ZOOM Clone APP</h1>
-      <form onSubmit={handleSubmit} className="login-form">
-        <h1 className="login-title"> LOGIN </h1>
-        <TextField
-          label="Username"
-          variant="outlined"
-          onChange={handleChange}
-          value={values.username}
-          name="username"
-        />
-        <TextField
-          label="Password"
-          variant="outlined"
-          onChange={handleChange}
-          value={values.password}
-          name="password"
-        />
-        <Button
-          color={formState}
-          className="login-btn"
-          type="submit"
-          variant="contained"
-        >
-          {formState == "error" ? "Retry" : "Login"}
-        </Button>
-        <Link to="/signup">Don't have an Account</Link>
+    <Form
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      label="Login"
+      onSubmit={onSubmit}
+    />
+  );
+};
+
+// Register
+const Register = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post("https://zoom-backend-awl3.onrender.com/auth/register", {
+        username,
+        password,
+      });
+      alert("Registration Completed! Now login.");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <Form
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      label="Register"
+      onSubmit={onSubmit}
+    />
+  );
+};
+
+const Form = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  label,
+  onSubmit,
+}) => {
+  return (
+    <div className="auth-container">
+      <form onSubmit={onSubmit}>
+        <h2>{label}</h2>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+        <button type="submit">{label}</button>
       </form>
     </div>
   );
-}
-
-export default Login;
+};
