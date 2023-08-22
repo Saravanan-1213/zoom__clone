@@ -14,7 +14,6 @@ const Home = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  // create meeting code
   const call = () => {
     setCopys(false);
     socket.emit("me", socket.id);
@@ -42,7 +41,6 @@ const Home = () => {
   const namehandle = (e) => {
     setName(e.target.value);
   };
-
   return (
     <div>
       <img
