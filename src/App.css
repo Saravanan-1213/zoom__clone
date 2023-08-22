@@ -118,6 +118,8 @@ label {
   text-align: center;
   margin-bottom: 500px;
   margin-right: 30px;
+  font-size: xx-large;
+  color: rgb(67, 179, 253);
 }
 .img-logo{
   display: flex;
