@@ -1,13 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import "./App.css";
 import { Button } from "@mui/material";
 
 const Home = () => {
-  const socket = io("https://zoom-backend-awl3.onrender.com");
+  //const socket = io("https://zoom-backend-awl3.onrender.com");
+  const socket = io("http://localhost:4000");
 
+  console.log(socket);
   const [code, setCode] = useState();
   const [copys, setCopys] = useState(false);
   const [val, setVal] = useState("");
@@ -19,6 +21,7 @@ const Home = () => {
     socket.emit("me", socket.id);
     socket.on("getid", (arg) => {
       setCode(arg);
+      console.log(arg);
     });
   };
 

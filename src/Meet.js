@@ -9,7 +9,8 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 
 const Meet = () => {
-  const socket = io("https://zoom-backend-awl3.onrender.com");
+  const socket = io("http://localhost:4000");
+
   const { name } = useParams();
   const { room } = useParams();
 
@@ -92,7 +93,7 @@ const Meet = () => {
   });
 
   socket.on("user-connect", (id, size, username) => {
-    // console.log(`new user : ${id}`);
+    console.log(`new user : ${id}`);
     console.log("new user");
     const found = callList.some((el) => el.id === id);
     // check the user is already in call or not
