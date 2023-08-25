@@ -7,18 +7,16 @@ import {
   Navigate,
 } from "react-router-dom";
 import Meet from "./Meet";
-import Login from "./login";
-import Signup from "./signup";
+import { Auth } from "./login";
 
 function App() {
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Auth />} />
           <Route path="/user" element={<Home />} />
           <Route path="/:name/:room" element={<Meet />} />
-          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </Router>

@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import { io } from "socket.io-client";
 import "./App.css";
 import { Button } from "@mui/material";
 
 const Home = () => {
-  //const socket = io("https://zoom-backend-awl3.onrender.com");
-  const socket = io("http://localhost:4000");
+  const socket = io("https://zoom-backend-rmto.onrender.com");
+  //const socket = io("http://localhost:4000");
 
   console.log(socket);
   const [code, setCode] = useState();
@@ -44,13 +45,24 @@ const Home = () => {
   const namehandle = (e) => {
     setName(e.target.value);
   };
+
+  // logout
+
+  const [cookies, setCookies] = useCookies(["access_token"]);
+
+  const logout = () => {
+    setCookies("access_token", "");
+    window.localStorage.removeItem("userID");
+    navigate("/");
+  };
+
   return (
     <div>
       <img
         className="zoom-image"
         src="https://1000logos.net/wp-content/uploads/2021/06/Zoom-Logo-2014.png"
       />
-      <h1 className="hero">Video Chat App</h1>
+      <h1 className="hero">ZOOM APP</h1>
 
       {/* host meeting */}
       <div className="flex flex-col container mx-auto  md:flex-row">
@@ -116,7 +128,7 @@ const Home = () => {
             src="https://global-uploads.webflow.com/5f8b3f92189560cd389cf2b3/6050eb64c6cade12359cab66_featured-look-good-zoom.png"
           />
           <div className="logout-btn">
-            <Button variant="contained" onClick={() => navigate("/")}>
+            <Button variant="contained" onClick={logout}>
               LOGOUT
             </Button>
           </div>
@@ -136,7 +148,7 @@ const Home = () => {
               placeholder="Enter your Name"
             />
             <input
-              required
+              required={true}
               value={val}
               onChange={change}
               type="text"

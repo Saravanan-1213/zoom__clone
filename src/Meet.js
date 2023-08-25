@@ -9,8 +9,7 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 
 const Meet = () => {
-  const socket = io("http://localhost:4000");
-
+  const socket = io("https://zoom-backend-rmto.onrender.com");
   const { name } = useParams();
   const { room } = useParams();
 
@@ -19,16 +18,15 @@ const Meet = () => {
 
   const mydiv = useRef();
   const myvideo = useRef();
-  const alertbox = useRef();
 
+  const alertbox = useRef();
   const callRef = useRef();
+
   const peer = new Peer(); // peer js
   const navigate = useNavigate();
-
   var myvideoStrm;
   const callList = [];
   const answerList = [];
-
   // create the video box
   const append = (video, stream, name) => {
     video.srcObject = stream;
@@ -53,14 +51,12 @@ const Meet = () => {
     mydiv.current.appendChild(div);
     RemoveUnusedDivs();
   };
-
   useEffect(() => {
     // generate the user id and send it to other users
     peer.once("open", (id) => {
       setIds(id);
       socket.emit("join", room, id, name);
     });
-
     // get the user webcam access
     navigator.mediaDevices
       .getUserMedia({ video: { height: 230, width: 300 }, audio: true })
@@ -72,7 +68,6 @@ const Meet = () => {
         }
       });
   }, []);
-
   // answering the call
   peer.on("call", (call, id) => {
     socket.on("addname", (username, id) => {
@@ -91,9 +86,8 @@ const Meet = () => {
       answerList.push({ call });
     });
   });
-
   socket.on("user-connect", (id, size, username) => {
-    console.log(`new user : ${id}`);
+    // console.log(`new user : ${id}`);
     console.log("new user");
     const found = callList.some((el) => el.id === id);
     // check the user is already in call or not
@@ -102,7 +96,6 @@ const Meet = () => {
     }
     socket.emit("tellname", name, id);
   });
-
   // on other user disconnect or leave the meeting remove him from meeting
   socket.on("user-disconnected", (id) => {
     console.log("disconnected");
@@ -119,7 +112,6 @@ const Meet = () => {
       answerList.splice(index2, 1);
     }
   });
-
   // making a call on other join the room
   const call = (id, username, myvideoStrm) => {
     const call = peer.call(id, myvideoStrm);
@@ -134,7 +126,6 @@ const Meet = () => {
     });
     callList.push({ id, call }); // add in call list
   };
-
   // remove the blank box in case of there present
   const RemoveUnusedDivs = () => {
     let alldivs = mydiv.current.getElementsByTagName("div");
@@ -145,7 +136,6 @@ const Meet = () => {
       }
     }
   };
-
   // video off/on
   const VideoControl = () => {
     const enable = media.getVideoTracks()[0].enabled;
@@ -160,7 +150,6 @@ const Meet = () => {
     // ===== another way to do above process ===== //
     // myvideoStrm.getVideoTracks()[0].enabled = !(myvideoStrm.getVideoTracks()[0].enabled);
   };
-
   // mute and unmute function
   const muteUnmute = () => {
     // Mute Audio
@@ -174,16 +163,14 @@ const Meet = () => {
       document.getElementById("audio").style.color = "black";
     }
   };
-
   // ending a call
   const leave = async () => {
     socket.emit("user-left", ids, room);
     media.getTracks().forEach(function (track) {
       track.stop();
     });
-    navigate("/user");
+    window.location.replace("/user");
   };
-
   // function for invite the people
   const invite = () => {
     navigator.clipboard.writeText(room);
